@@ -1,0 +1,153 @@
+{
+  "name": "robotcode-gherkin",
+  "displayName": "Robot Code Gherkin",
+  "description": "Gherkin Support for Robot Code",
+  "icon": "icons/icon.png",
+  "publisher": "d-biehl",
+  "version": "0.0.0",
+  "author": {
+    "name": "Daniel Biehl",
+    "url": "https://github.com/d-biehl/"
+  },
+  "homepage": "https://github.com/d-biehl/robotframework-gherkin-parser",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/d-biehl/robotframework-gherkin-parser"
+  },
+  "bugs": {
+    "url": "https://github.com/d-biehl/robotframework-gherkin-parser/issues"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Testing",
+    "Debuggers",
+    "Formatters",
+    "Linters"
+  ],
+  "keywords": [
+    "Test",
+    "Testing",
+    "RobotFramework",
+    "Robot Framework",
+    "Robot",
+    "Keyword Driven",
+    "Data Driven",
+    "Acceptance Testing",
+    "Acceptance Test Driven Development",
+    "Test Driven",
+    "Behavior Driven Development",
+    "BDD",
+    "Behavior Driven Testing",
+    "BDT",
+    "Robotic Process Automation",
+    "RPA"
+  ],
+  "featureFlags": {
+    "usingNewInterpreterStorage": true
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "Only Partial IntelliSense is supported."
+    },
+    "virtualWorkspaces": {
+      "supported": "limited",
+      "description": "Only Partial IntelliSense supported."
+    }
+  },
+  "activationEvents": [
+    "workspaceContains:**/*.{feature,feature.md}"
+  ],
+  "galleryBanner": {
+    "theme": "dark",
+    "color": "#111111"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/d-biehl"
+  },
+  "main": "./out/extension.js",
+  "contributes": {
+    "robotCode": {
+      "TODO": "TODO"
+    },
+    "languages": [
+      {
+        "id": "gherkin",
+        "aliases": [
+          "Gherkin",
+          "Cucumber"
+        ],
+        "icon": {
+          "light": "./icons/cucumber.svg",
+          "dark": "./icons/cucumber.svg"
+        },
+        "extensions": [
+          ".feature"
+        ]
+      },
+      {
+        "id": "markdown",
+        "aliases": [
+          "Markdown"
+        ],
+        "icon": {
+          "light": "./icons/cucumber.svg",
+          "dark": "./icons/cucumber.svg"
+        },
+        "extensions": [
+          ".feature.md"
+        ]
+      }
+    ],
+    "breakpoints": [
+      {
+        "language": "gherkin"
+      },
+      {
+        "language": "markdown",
+        "when": "resourceFilename =~ /^.*\\.feature\\.md$/"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "webpack --mode production",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch",
+    "test-compile": "tsc -p ./",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint --ext .ts,.tsx,.js .",
+    "lint-fix": "eslint --ext .ts,.tsx,.js --fix .",
+    "test": "node ./out/test/runTest.js"
+  },
+  "extensionDependencies": [
+    "d-biehl.robotcode"
+  ],
+  "dependencies": {
+    "ansi-colors": "^4.1.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
+    "@typescript-eslint/parser": "^5.59.7",
+    "@vscode/test-electron": "^2.3.2",
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "@vscode/vsce": "^2.19.0",
+    "ovsx": "^0.8.1",
+    "prettier": "^2.8.8",
+    "ts-loader": "^9.4.3",
+    "typescript": "^5.0.4",
+    "webpack": "^5.83.1",
+    "webpack-cli": "^5.1.1"
+  }
+}

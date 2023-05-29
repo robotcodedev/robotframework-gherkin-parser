@@ -1,0 +1,64 @@
+.idea
+.github
+.vscode
+.vscode-test
+
+**/.gitignore
+
+# node
+src/
+node_modules/
+webpack.config.js
+.yarnrc
+.eslintrc.json
+tsconfig.json
+vscode-client
+.eslintignore
+.prettier*
+
+
+# python
+build
+.ruff_cache
+.hatch
+.venv
+.flake8
+mypy.ini
+log.ini
+pyproject.toml
+*.lock
+
+tests
+dist
+
+**/__pycache__
+**/.mypy_cache
+**/.pytest_cache
+test-results
+
+playground
+
+# svg files
+**/*.svg
+
+# coverage
+.coverage
+coverage.xml
+.python-version
+
+# mkdocs
+docs
+overrides
+site
+
+# others
+scripts
+
+**/.robotcode_cache
+
+.pre-commit-config.yaml
+.devcontainer
+
+robotcode
+packages
+bundled/libs/bin

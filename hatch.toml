@@ -1,0 +1,134 @@
+[version]
+path = "src/GherkinParser/__version__.py"
+
+[build]
+dev-mode-dirs = ["src"]
+
+[build.targets.wheel]
+only-include = ["src/GherkinParser"]
+sources = ["src"]
+
+[build.targets.sdist]
+only-include = ["src", "CHANGELOG.md"]
+
+
+[envs.default]
+dependencies = [
+  "pytest",
+  "pytest-html",
+  "pytest_asyncio",
+  "pytest-regtest>=1.5.0",
+  "pytest-cov",
+  "mypy",
+  "ruff",
+  "black",
+  "debugpy",
+  "GitPython",
+  "semantic-version",
+]
+pre-install-commands = ["install-packages"]
+
+
+[envs.default.scripts]
+cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=GherkinParser --cov=tests {args}"
+no-cov = "cov --no-cov {args}"
+test = "pytest {args}"
+test-reset = "test --regtest-reset"
+install-bundled-editable = "python ./scripts/install_bundled_editable.py"
+install-packages = "python ./scripts/install_packages.py"
+
+[envs.rfmaster]
+python = "3.11"
+extra-dependencies = [
+  "robotframework @ git+https://github.com/robotframework/robotframework.git",
+]
+
+[envs.rfdevel]
+python = "3.11"
+post-install-commands = ["pip install -U -e {root:uri}/../robotframework"]
+
+[envs.py312_rfmaster]
+python = "3.12"
+extra-dependencies = [
+  "robotframework @ git+https://github.com/robotframework/robotframework.git",
+]
+
+[envs.devel]
+python = "3.8"
+
+[[envs.devel.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11"]
+rf = ["rf61b1", "master"]
+
+[envs.devel.overrides]
+matrix.rf.dependencies = [
+  { value = "robotframework==6.1b1", if = [
+    "rf61b1",
+  ] },
+  { value = "robotframework @ git+https://github.com/robotframework/robotframework.git", if = [
+    "master",
+  ] },
+]
+
+[[envs.test.matrix]]
+rf = ["rf61b1", "master"]
+
+[envs.test.overrides]
+matrix.rf.dependencies = [
+  { value = "robotframework==6.1b1", if = [
+    "rf61b1",
+  ] },
+  { value = "robotframework @ git+https://github.com/robotframework/robotframework.git", if = [
+    "master",
+  ] },
+]
+
+[envs.lint]
+#skip-install = true
+#extra-dependencies = ["tomli>=2.0.0"]
+
+
+[envs.lint.scripts]
+typing = ["mypy --install-types --non-interactive {args:.}"]
+style = ["ruff .", "black --check --diff ."]
+fmt = ["black .", "ruff --fix .", "style"]
+all = ["style", "typing"]
+
+[envs.pages]
+#detached = true
+extra-dependencies = [
+  "mkdocs>=1.4.2",
+  "mkdocs-material",
+  # Plugins
+  "mkdocs-minify-plugin",
+  "mkdocs-git-revision-date-localized-plugin",
+  "mkdocstrings-python",
+  "mkdocs-redirects",
+  "mkdocs-glightbox",
+
+  # Extensions
+  "mkdocs-click~=0.8.0",
+  "pymdown-extensions~=9.6.0",
+  # Necessary for syntax highlighting in code blocks
+  "pygments",
+  "mike",
+]
+
+[envs.pages.scripts]
+build = ["mkdocs build"]
+deploy = ["python scripts/deploy_docs.py"]
+
+
+[envs.build]
+skip-install = true
+detached = true
+python = "38"
+dependencies = ["GitPython", "semantic-version"]
+
+[envs.build.scripts]
+update-git-versions = ["python scripts/update_git_versions.py"]
+update-doc-links = ["python scripts/update_doc_links.py"]
+package = ["python scripts/package.py"]
+publish = ["python scripts/publish.py"]
+extract-release-notes = ["python scripts/extract_release_notes.py"]
+is-prerelease = ["python scripts/is_prerelease.py"]

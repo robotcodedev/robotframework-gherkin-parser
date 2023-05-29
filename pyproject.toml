@@ -1,0 +1,211 @@
+[build-system]
+requires = ["hatchling>=1.12.2"]
+build-backend = "hatchling.build"
+
+
+[project]
+name = "robotframework-gherkin-parser"
+description = "Gherkin parser for Robot Framework"
+authors = [{ name = "Daniel Biehl", email = "dbiehl@live.de" }]
+readme = { "file" = "README.md", "content-type" = "text/markdown" }
+license = { text = "Apache-2.0" }
+keywords = [
+  "Test",
+  "Testing",
+  "RobotFramework",
+  "Keyword Driven",
+  "Data Driven",
+  "Acceptance Testing",
+  "Acceptance Test Driven Development",
+  "BDD",
+  "Behavior Driven Testing",
+  "BDT",
+  "Gherkin",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Topic :: Software Development :: Testing",
+  "Topic :: Software Development :: Testing :: Acceptance",
+  "Topic :: Software Development :: Testing :: BDD",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Utilities",
+  "Typing :: Typed",
+  "Topic :: Software Development :: Debuggers",
+  "Topic :: Text Editors :: Integrated Development Environments (IDE)",
+  "Intended Audience :: Developers",
+  "Framework :: Robot Framework",
+  "Framework :: Robot Framework :: Library",
+  "Framework :: Robot Framework :: Tool",
+]
+requires-python = ">=3.8"
+dependencies = ["robotframework>=6.1b1"]
+dynamic = ["version"]
+
+
+[project.urls]
+Homepage = "https://github.com/d-biehl/robotframework-gherkin-parser"
+Donate = "https://github.com/sponsors/d-biehl"
+Documentation = "https://github.com/d-biehl/robotframework-gherkin-parser#readme"
+Changelog = "https://github.com/d-biehl/robotframework-gherkin-parser/blob/main/CHANGELOG.md"
+Issues = "https://github.com/d-biehl/robotframework-gherkin-parser/issues"
+Source = "https://github.com/d-biehl/robotframework-gherkin-parser"
+
+
+[tool.semantic_release]
+version_variable = [
+  "src/GherkinParser/__version__.py:__version__",
+  #"packages/analyze/src/robotcode/analyze/__version__.py:__version__",
+]
+version_pattern = [
+  'package.json:"version": "{version}"',
+  #"packages/analyze/pyproject.toml:\"robotcode\\S*=={version}\"",
+  #"pyproject.toml:\"robotcode\\S*=={version}\"",
+]
+branch = "main"
+upload_to_release = false
+upload_to_repository = false
+build_command = "pip install hatch && hatch build"
+
+[tool.black]
+line-length = 120
+target-version = ['py38']
+extend-exclude = '''
+(
+  /(
+    | bundled/libs
+  )/
+)
+'''
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -vv -rf --ignore=bundled --ignore=.hatch"
+filterwarnings = "ignore:.*Using or importing the ABCs from 'collections' instead of from 'collections.abc'.*:DeprecationWarning"
+testpaths = ["tests"]
+junit_suite_name = "GherkinParser Tests"
+# console_output_style = "classic"
+# log_cli = true
+# log_cli_level = 4
+# log_cli_format = "%(levelname)s %(name)s: %(message)s"
+asyncio_mode = "auto"
+faulthandler_timeout = 30
+
+
+[tool.coverage.run]
+omit = ["*tests*"]
+source = ["GherkinParser"]
+
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "if __name__ == .__main__.:",
+  "raise NotImplementedError",
+]
+fail_under = 40
+
+
+[tool.ruff]
+line-length = 120
+target-version = "py38"
+extend-exclude = ["bundled/libs"]
+ignore = ["E741", "N805", "N999"]
+select = [
+  "E",
+  "F",
+  "W",
+  "I",
+  "N",
+  #"UP",
+  "YTT",
+  #"ANN",
+  #"BLE",
+  #"B",
+  #"A"
+  #"COM"
+  # "C4", # TODO enable this
+  "DTZ",
+  "T10",
+  # "EM",
+  "ISC",
+  "G",
+  #"INP",
+  "PIE",
+  # "T20",
+  "PT",
+  "Q",
+  "RET",
+  # "SIM", # TODO enable this
+  # "TID",
+  # "TCH",
+  # "ARG",
+  # "PTH", # TODO enable this
+  # "SLF", #  TODO enable this
+  # "ERA", # TODO enable this
+  "RSE",
+  # "PL",
+  #"TRY",
+  "RUF",
+  # "TID"
+]
+
+
+[tool.ruff.per-file-ignores]
+#"__init__.py" = ["F401"]
+
+
+[tool.mypy]
+python_version = "3.8"
+strict = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+warn_unused_configs = true
+warn_unreachable = true
+implicit_optional = true
+# disallow_untyped_decorators = false
+disallow_subclassing_any = false
+exclude = [
+  "\\.mypy_cache",
+  "\\.venv",
+  "\\.hatch",
+  "build",
+  "dist",
+  "out",
+  "playground",
+  "scripts",
+  "bundled/libs",
+]
+mypy_path = [
+  "typings",
+  "src",
+  #"packages/core/src",
+]
+explicit_package_bases = true
+namespace_packages = true
+
+
+[[tool.mypy.overrides]]
+module = [
+  "robot.*",
+  "debugpy.*",
+  "robotidy.*",
+  "robocop.*",
+  "pytest_regtest.*",
+  "pluggy",
+]
+ignore_missing_imports = true
+
+[tool.pyright]
+exclude = ["**/.hatch", "**/node_modules", "**/__pycache__", "bundled/libs"]
+typeCheckingMode = "off"
+pythonVersion = "3.8"

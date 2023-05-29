@@ -1,0 +1,154 @@
+// A launch configuration that compiles the extension and then opens it inside a new window
+// Use IntelliSense to learn about possible attributes.
+// Hover to view descriptions of existing attributes.
+// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Python: Debug in terminal",
+			"type": "python",
+			"request": "launch",
+			"purpose": [
+				"debug-in-terminal"
+			],
+			"justMyCode": false
+		},
+		{
+			"name": "Python: Attach using Process Id",
+			"type": "python",
+			"request": "attach",
+			"processId": "${command:pickProcess}"
+		},
+		{
+			"name": "Python: Current File",
+			"type": "python",
+			"request": "launch",
+			"program": "${file}",
+			"console": "integratedTerminal",
+			"justMyCode": false,
+			"cwd": "${workspaceFolder}",
+		},
+		{
+			"name": "Python: Attach to 5678",
+			"type": "python",
+			"request": "attach",
+			"connect": {
+				"host": "localhost",
+				"port": 5678
+			},
+			"justMyCode": false,
+			"subProcess": true,
+			"showReturnValue": true,
+		},
+		{
+			"name": "Python: Attach Prompt",
+			"type": "python",
+			"request": "attach",
+			"connect": {
+				"host": "localhost",
+				"port": "${input:portNumber}"
+			}
+		},
+		{
+			"name": "Python: Pytest All Test",
+			"type": "python",
+			"request": "launch",
+			"module": "pytest",
+			"args": [
+				"."
+			],
+			"console": "integratedTerminal",
+			"justMyCode": false,
+			"cwd": "${workspaceFolder}",
+		},
+		{
+			"name": "Python: Pytest Some Test",
+			"type": "python",
+			"request": "launch",
+			"module": "pytest",
+			"args": [
+				"--full-trace",
+				"--tb=native",
+				"tests"
+			],
+			"console": "integratedTerminal",
+			"justMyCode": false,
+			"cwd": "${workspaceFolder}",
+		},
+		{
+			"name": "Python: Pytest Current File",
+			"type": "python",
+			"request": "launch",
+			"module": "pytest",
+			"args": [
+				"${file}"
+			],
+			"console": "integratedTerminal",
+			"justMyCode": false,
+			"cwd": "${workspaceFolder}",
+		},
+		{
+			"name": "Run Extension",
+			"type": "extensionHost",
+			"request": "launch",
+			"args": [
+				"--extensionDevelopmentPath=${workspaceFolder}/../robotcode",
+				"--extensionDevelopmentPath=${workspaceFolder}",
+			],
+			"outFiles": [
+				"${workspaceFolder}/out/**/*.js"
+			],
+			"preLaunchTask": "npm: compile"
+		},
+		{
+			"name": "Extension Tests",
+			"type": "extensionHost",
+			"request": "launch",
+			"runtimeExecutable": "${execPath}",
+			"args": [
+				"--extensionDevelopmentPath=${workspaceFolder}",
+				"--extensionTestsPath=${workspaceFolder}/out/test/suite/index"
+			],
+			"outFiles": [
+				"${workspaceFolder}/out/test/**/*.js"
+			],
+			"preLaunchTask": "npm: compile"
+		},
+		{
+			"name": "Python: Debug Tests",
+			"type": "python",
+			"request": "launch",
+			"program": "${file}",
+			"purpose": [
+				"debug-test"
+			],
+			"console": "integratedTerminal",
+			"justMyCode": false
+		},
+		{
+			"name": "Python: Remote-Attach",
+			"type": "python",
+			"request": "attach",
+			"connect": {
+				"host": "localhost",
+				"port": 5678
+			},
+			"pathMappings": [
+				{
+					"localRoot": "${workspaceFolder}",
+					"remoteRoot": "."
+				}
+			],
+			"justMyCode": true
+		}
+	],
+	"inputs": [
+		{
+			"type": "promptString",
+			"id": "portNumber",
+			"description": "debugpy portnumber",
+			"default": "5678",
+		}
+	]
+}
