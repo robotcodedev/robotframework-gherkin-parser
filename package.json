@@ -4,7 +4,7 @@
   "description": "Gherkin Support for Robot Code",
   "icon": "icons/icon.png",
   "publisher": "d-biehl",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": {
     "name": "Daniel Biehl",
     "url": "https://github.com/d-biehl/"

@@ -29,7 +29,6 @@ def run(title: str, *args: Any, **kwargs: Any) -> None:
         raise
     except BaseException as e:
         print(f"{title} failed: {e}", file=sys.stderr)
-        pass
 
 
 def main() -> None:
@@ -45,9 +44,13 @@ def main() -> None:
     run("npx vsce publish", f"npx vsce publish -i {vsix_path}", shell=True, timeout=600)
     run("npx ovsx publish", f"npx ovsx publish {vsix_path}", shell=True, timeout=600)
 
+    pypi_args = ""
+    if os.environ.get("PYPI_USERNAME") and os.environ.get("PYPI_PASSWORD"):
+        pypi_args = f' -u "{os.environ["PYPI_USERNAME"]}" -a "{os.environ["PYPI_PASSWORD"]}"'
+
     run(
         "hatch publish",
-        f'hatch -e build publish -u "{os.environ["PYPI_USERNAME"]}" -a "{os.environ["PYPI_PASSWORD"]}"',
+        f"hatch -e build publish{pypi_args}",
         shell=True,
         timeout=600,
     )
