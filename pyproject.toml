@@ -187,11 +187,7 @@ exclude = [
   "scripts",
   "bundled/libs",
 ]
-mypy_path = [
-  "typings",
-  "src",
-  "packages/gurke/src",
-]
+mypy_path = ["typings", "src", "packages/gurke/src"]
 explicit_package_bases = true
 namespace_packages = true
 
@@ -211,3 +207,23 @@ ignore_missing_imports = true
 exclude = ["**/.hatch", "**/node_modules", "**/__pycache__", "bundled/libs"]
 typeCheckingMode = "off"
 pythonVersion = "3.8"
+
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+bump_message = "chore(release): bump version $current_version → $new_version"
+tag_format = "v$version"
+version_scheme = "semver"
+version_provider = "scm"
+update_changelog_on_bump = false
+major_version_zero = true
+changelog_incremental = true
+changelog_merge_prerelease = true
+gpg_sign = true
+annotated_tag = true
+pre_bump_hooks = [
+  "hatch env remove lint",
+  "hatch run build:update-git-versions",
+  "hatch run build:update-changelog",
+  "git add .",
+]

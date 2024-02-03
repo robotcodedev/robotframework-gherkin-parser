@@ -1,7 +1,7 @@
 {
   "name": "robotcode-gherkin",
-  "displayName": "Robot Code Gherkin",
-  "description": "Gherkin Support for Robot Code",
+  "displayName": "RobotCode GherkinParser Support",
+  "description": "GherkinParser Support for RobotCode and Robot Framework",
   "icon": "icons/icon.png",
   "publisher": "d-biehl",
   "version": "0.0.1",
