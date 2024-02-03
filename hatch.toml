@@ -57,29 +57,23 @@ extra-dependencies = [
 python = "3.8"
 
 [[envs.devel.matrix]]
-python = ["3.8", "3.9", "3.10", "3.11"]
-rf = ["rf61b1", "master"]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+rf = ["rf70"]
 
 [envs.devel.overrides]
 matrix.rf.dependencies = [
-  { value = "robotframework==6.1b1", if = [
-    "rf61b1",
-  ] },
-  { value = "robotframework @ git+https://github.com/robotframework/robotframework.git", if = [
-    "master",
+  { value = "robotframework>=7.0, <7.1", if = [
+    "rf70",
   ] },
 ]
 
 [[envs.test.matrix]]
-rf = ["rf61b1", "master"]
+rf = ["rf70", "master"]
 
 [envs.test.overrides]
 matrix.rf.dependencies = [
-  { value = "robotframework==6.1b1", if = [
-    "rf61b1",
-  ] },
-  { value = "robotframework @ git+https://github.com/robotframework/robotframework.git", if = [
-    "master",
+  { value = "robotframework==7.0, <7.1", if = [
+    "rf70",
   ] },
 ]
 

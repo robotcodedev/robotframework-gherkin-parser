@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "RobotCode: Run Current",
+            "type": "robotcode",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "target": "${file}"
+        },
+        {
+            "name": "RobotCode: Run All",
+            "type": "robotcode",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "target": "."
+        },
+        {
+            "name": "RobotCode: Default",
+            "type": "robotcode",
+            "request": "launch",
+            "purpose": "default",
+            "presentation": {
+                "hidden": true
+            },
+            "attachPython": true,
+            "pythonConfiguration": "RobotCode: Python"
+        },
+        {
+            "name": "RobotCode: Python",
+            "type": "python",
+            "request": "attach",
+            "presentation": {
+                "hidden": true
+            },
+            "justMyCode": false
+        }
+    ]
+}

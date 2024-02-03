@@ -1,0 +1,8 @@
+{
+    // "robotcode.extraArgs": [
+    //     "-v"
+    // ]
+    "robotcode.debug.attachPython": true,
+    "debugpy.debugJustMyCode": false,
+    "python.analysis.typeCheckingMode": "off"
+}

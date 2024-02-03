@@ -46,7 +46,7 @@ classifiers = [
   "Framework :: Robot Framework :: Tool",
 ]
 requires-python = ">=3.8"
-dependencies = ["robotframework>=6.1b1"]
+dependencies = ["robotframework>=7.0", "gurke == 0.0.0"]
 dynamic = ["version"]
 
 
@@ -62,17 +62,19 @@ Source = "https://github.com/d-biehl/robotframework-gherkin-parser"
 [tool.semantic_release]
 version_variable = [
   "src/GherkinParser/__version__.py:__version__",
-  #"packages/analyze/src/robotcode/analyze/__version__.py:__version__",
+  "packages/gurke/src/gurke/__version__.py:__version__",
 ]
 version_pattern = [
   'package.json:"version": "{version}"',
-  #"packages/analyze/pyproject.toml:\"robotcode\\S*=={version}\"",
-  #"pyproject.toml:\"robotcode\\S*=={version}\"",
+  "packages/gurke/pyproject.toml:\"robotcode\\S*=={version}\"",
+  "pyproject.toml:\"robotcode\\S*=={version}\"",
+  "pyproject.toml:\"gurke\\S*=={version}\"",
 ]
 branch = "main"
 upload_to_release = false
 upload_to_repository = false
 build_command = "pip install hatch && hatch build"
+
 
 [tool.black]
 line-length = 120
@@ -188,7 +190,7 @@ exclude = [
 mypy_path = [
   "typings",
   "src",
-  #"packages/core/src",
+  "packages/gurke/src",
 ]
 explicit_package_bases = true
 namespace_packages = true
