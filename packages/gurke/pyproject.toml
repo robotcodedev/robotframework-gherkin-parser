@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gurke"
+description = 'Pure Python3 Gherkin parser'
+readme = { "file" = "README.md", "content-type" = "text/markdown" }
+requires-python = ">=3.8"
+license = "Apache-2.0"
+keywords = []
+authors = [{ name = "Daniel Biehl", email = "dbiehl@live.de" }]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Operating System :: OS Independent",
+  "Topic :: Utilities",
+  "Typing :: Typed",
+]
+dependencies = ["typing-extensions>=4.4.0"]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/d-biehl/robotframework-gherkin-parser"
+Donate = "https://github.com/sponsors/d-biehl"
+Documentation = "https://github.com/d-biehl/robotframework-gherkin-parser#readme"
+Changelog = "https://github.com/d-biehl/robotframework-gherkin-parser/blob/main/CHANGELOG.md"
+Issues = "https://github.com/d-biehl/robotframework-gherkin-parser/issues"
+Source = "https://github.com/d-biehl/robotframework-gherkin-parser/robotcode"
+
+[tool.hatch.version]
+path = "src/gurke/__version__.py"
+
+[tool.hatch.build]
+dev-mode-dirs = ["src"]
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src/gurke"]
+sources = ["src"]
+
+[tool.hatch.build.targets.sdist]
+only-include = ["src"]
+
+[tool.hatch.envs.default.scripts]
+generate-parser = "berp -g gherkin.berp -t gherkin-python.razor --noBOM -o src/gurke/parser.py"
+
+[tool.hatch.envs.build]
+detached = true
+python = "38"
