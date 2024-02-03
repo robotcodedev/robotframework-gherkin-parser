@@ -2,7 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
-## [0.1.1-dev.1](https://github.com/d-biehl/robotframework-gherkin-parser/compare/v0.1.0..v0.1.1-dev.1) - 2024-02-03
+## [0.2.1](https://github.com/d-biehl/robotframework-gherkin-parser/compare/v0.2.0..v0.2.1) - 2024-02-03
+
+### Bug Fixes
+
+- Again correct version scripts ([5a95b82](https://github.com/d-biehl/robotframework-gherkin-parser/commit/5a95b82ceb6c0a2ba221f828d610a66fe39e71bf))
+
+
+## [0.2.0](https://github.com/d-biehl/robotframework-gherkin-parser/compare/v0.1.0..v0.2.0) - 2024-02-03
 
 ### Features
 
