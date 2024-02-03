@@ -4,7 +4,7 @@
   "description": "GherkinParser Support for RobotCode and Robot Framework",
   "icon": "icons/icon.png",
   "publisher": "d-biehl",
-  "version": "0.0.1",
+  "version": "0.0.2-dev.2",
   "author": {
     "name": "Daniel Biehl",
     "url": "https://github.com/d-biehl/"
