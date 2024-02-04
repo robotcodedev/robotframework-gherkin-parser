@@ -1,15 +1,19 @@
 import * as vscode from "vscode";
-
-export async function activateAsync(_context: vscode.ExtensionContext): Promise<void> {
+import { GherkinFormattingEditProvider } from "./formattingEditProvider";
+export async function activateAsync(context: vscode.ExtensionContext): Promise<void> {
   const robotcode = vscode.extensions.getExtension("d-biehl.robotcode");
   if (!robotcode) {
     return;
   }
   await robotcode.activate();
-  const robotcodeExtensionApi = robotcode.exports;
-  if (!robotcodeExtensionApi) {
-    return;
-  }
+  // const robotcodeExtensionApi = robotcode.exports;
+  // if (!robotcodeExtensionApi) {
+  //   return;
+  // }
+
+  context.subscriptions.push(
+    vscode.languages.registerDocumentFormattingEditProvider("gherkin", new GherkinFormattingEditProvider()),
+  );
 }
 
 function displayProgress<R>(promise: Promise<R>): Thenable<R> {
