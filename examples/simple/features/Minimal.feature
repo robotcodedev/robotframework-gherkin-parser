@@ -9,8 +9,7 @@ Feature: Minimal
   Scenario: another one
     Given do something in the maximal way
 
-  @another
-  @slow
+  @another @slow
   Scenario: another one1
     Given the minimalism
 
@@ -26,5 +25,5 @@ Feature: Minimal
 
     Examples:
       | FirstName | MiddleName | LastName |
-      | Daniel   | D          | Biehl     |
-      | Philip     | K          | Dick     |
+      | Daniel    | D          | Biehl    |
+      | Philip    | K          | Dick     |

@@ -2,10 +2,9 @@ from itertools import chain
 from typing import Any, Iterator, List, Tuple, Union
 
 from robot import result, running
-from robot.api.deco import keyword, library
+from robot.api.deco import library
 from robot.api.interfaces import ListenerV3
 from robot.libraries.BuiltIn import EXECUTION_CONTEXTS, BuiltIn
-from robot.model import Keyword
 
 
 @library(
@@ -81,17 +80,21 @@ class Library(ListenerV3):
                 kws.append("AND")
             kws.append(name)
 
+        lineno = data.lineno if isinstance(data, running.TestCase) else 1
+
         if kws:
             if data.setup.name:
                 data.setup.config(
                     name="BuiltIn.Run Keywords",
                     args=(*kws, "AND", data.setup.name, *data.setup.args),
+                    lineno = lineno
                 )
 
             else:
                 data.setup.config(
                     name="BuiltIn.Run Keywords",
                     args=(*kws,),
+                    lineno = lineno
                 )
 
         kws = []
@@ -106,12 +109,14 @@ class Library(ListenerV3):
                 data.setup.config(
                     name="BuiltIn.Run Keywords",
                     args=(*kws, "AND", data.teardown.name, *data.teardown.args),
+                    lineno = lineno
                 )
 
             else:
                 data.teardown.config(
                     name="BuiltIn.Run Keywords",
                     args=(*kws,),
+                    lineno = lineno
                 )
 
     def start_suite(self, data: running.TestSuite, result: result.TestSuite) -> None:

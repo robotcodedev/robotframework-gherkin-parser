@@ -23,10 +23,6 @@ from robot.parsing.model.statements import (
     SectionHeader,
     Tags,
     TestTags,
-    TestSetup,
-    TestTeardown,
-    SuiteSetup,
-    SuiteTeardown,
 )
 from robot.utils.filereader import FileReader
 
@@ -152,10 +148,6 @@ def build_gherkin_model(source: PathLike[str], content: Optional[str] = None) ->
                 if feature_tags
                 else []
             ),
-            # SuiteSetup.from_params("GherkinParser.Library.BeforeSuite"),
-            # SuiteTeardown.from_params("GherkinParser.Library.AfterSuite"),
-            # TestSetup.from_params("GherkinParser.Library.BeforeTest"),
-            # TestTeardown.from_params("GherkinParser.Library.AfterTest"),
         ]
 
         file = File(
@@ -172,7 +164,7 @@ def build_gherkin_model(source: PathLike[str], content: Optional[str] = None) ->
             source=str(path),
         )
 
-        file.save(path.with_suffix(".robot").with_stem("_" + path.name))
+        # file.save(path.with_suffix(".robot").with_stem("_" + path.name))
 
         return file, gherkin_document["feature"]["name"]
     except (SystemExit, KeyboardInterrupt):

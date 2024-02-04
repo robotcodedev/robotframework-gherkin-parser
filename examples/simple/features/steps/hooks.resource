@@ -3,13 +3,12 @@ before_test
     [Arguments]    ${context}=    ${test}=
     [Tags]    hook:before-test
     Log    before test
-    Fail    har har test
+    # Fail    har har test
 
 before_suite
     [Arguments]    ${context}=    ${suite}=
     [Tags]    hook:before-suite
     Log    hook before suite
-    #Fail    hahar suite
 
 before_keyword
     [Arguments]    ${context}=    ${suite}=
