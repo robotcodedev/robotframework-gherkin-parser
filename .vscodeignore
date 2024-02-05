@@ -37,6 +37,7 @@ dist
 test-results
 
 playground
+examples
 
 # svg files
 **/*.svg

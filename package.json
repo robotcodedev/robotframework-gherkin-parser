@@ -91,8 +91,8 @@
           "Cucumber"
         ],
         "icon": {
-          "light": "./icons/cucumber.svg",
-          "dark": "./icons/cucumber.svg"
+          "light": "./icons/cucumber.png",
+          "dark": "./icons/cucumber.png"
         },
         "extensions": [
           ".feature"
@@ -104,8 +104,8 @@
           "Markdown"
         ],
         "icon": {
-          "light": "./icons/cucumber.svg",
-          "dark": "./icons/cucumber.svg"
+          "light": "./icons/cucumber.png",
+          "dark": "./icons/cucumber.png"
         },
         "extensions": [
           ".feature.md"

@@ -190,7 +190,7 @@ def build_gherkin_model(source: PathLike[str], content: Optional[str] = None) ->
             source=str(path),
         )
 
-        file.save(path.with_suffix(".robot").with_stem("_" + path.name))
+        # file.save(path.with_suffix(".robot").with_stem("_" + path.name))
 
         return file, gherkin_document["feature"]["name"]
     except (SystemExit, KeyboardInterrupt):
