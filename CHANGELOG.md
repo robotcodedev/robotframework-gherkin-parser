@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
+## [0.3.0](https://github.com/d-biehl/robotframework-gherkin-parser/compare/v0.2.1..v0.3.0) - 2024-02-05
+
+### Bug Fixes
+
+- **GherkinParser:** Fix lineno in hooks ([07ad49c](https://github.com/d-biehl/robotframework-gherkin-parser/commit/07ad49c203f489e6c8a96e5ef96261de4b155418))
+- **GherkinParser:** Steps with arguments now works correctly ([0c6ee44](https://github.com/d-biehl/robotframework-gherkin-parser/commit/0c6ee44af3ed55b57f83d89dc6bccbf0dcdb1529))
+
+
+### Features
+
+- **vscode:** Implement simple formatting provider ([cba43de](https://github.com/d-biehl/robotframework-gherkin-parser/commit/cba43debe49d8fdb48820a79fa53b08ae525871e))
+
+
 ## [0.2.1](https://github.com/d-biehl/robotframework-gherkin-parser/compare/v0.2.0..v0.2.1) - 2024-02-03
 
 ### Bug Fixes
