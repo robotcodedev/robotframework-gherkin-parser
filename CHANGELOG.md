@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
+## [0.3.1](https://github.com/d-biehl/robotframework-gherkin-parser/compare/v0.3.0..v0.3.1) - 2024-02-05
+
+### Bug Fixes
+
+- **build:** Correct dependency versions ([dfadf76](https://github.com/d-biehl/robotframework-gherkin-parser/commit/dfadf765df342d7234f6e5ed089c5e2bbbd6764b))
+
+
 ## [0.3.0](https://github.com/d-biehl/robotframework-gherkin-parser/compare/v0.2.1..v0.3.0) - 2024-02-05
 
 ### Bug Fixes
