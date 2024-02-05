@@ -1,4 +1,5 @@
 import ast
+import re
 from os import PathLike
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
@@ -27,6 +28,26 @@ from robot.parsing.model.statements import (
 from robot.utils.filereader import FileReader
 
 from .glob_path import iter_files
+
+_CONTROL_WORDS = frozenset(("ELSE", "ELSE IF", "AND"))
+_SEQUENCES_TO_BE_ESCAPED = ("=",)
+
+
+def escape_whitespace(match: re.Match) -> str:
+    return "\\".join(match.group(0))
+
+
+def escape(item: str) -> str:
+    if item in _CONTROL_WORDS:
+        return "\\" + item
+
+    item = repr(item)[1:-1]
+
+    for seq in _SEQUENCES_TO_BE_ESCAPED:
+        if seq in item:
+            item = item.replace(seq, "\\" + seq)
+
+    return re.sub(r"\s+", escape_whitespace, item)
 
 
 def find_ast_node_id(
@@ -85,12 +106,17 @@ def build_gherkin_model(source: PathLike[str], content: Optional[str] = None) ->
                 if node is None:
                     continue
 
-                datatable = node.get("dataTable")
                 args: Tuple[str, ...] = ()
+                step_argument = step.get("argument", None)
+                if step_argument is not None:
+                    doc_string = step_argument.get("docString", None)
+                    if doc_string is not None:
+                        args = (f"&{{{{{escape(repr(doc_string))}}}}}",)
 
-                if datatable:
-                    rows = [[v.get("value") for v in r.get("cells")] for r in datatable["rows"]]
-                    args = (f"${{{{{rows!r}}}}}",)
+                    datatable = step_argument.get("dataTable", None)
+                    if datatable is not None:
+                        #rows = [[v.get("value") for v in r.get("cells")] for r in datatable["rows"]]
+                        args = (f"&{{{{{escape(repr(datatable))}}}}}",)
 
                 keyword_call = KeywordCall.from_params(
                     f"{node['keyword'] if step['type']!='Unknown' else ''}{step['text']}", args=args
@@ -164,7 +190,7 @@ def build_gherkin_model(source: PathLike[str], content: Optional[str] = None) ->
             source=str(path),
         )
 
-        # file.save(path.with_suffix(".robot").with_stem("_" + path.name))
+        file.save(path.with_suffix(".robot").with_stem("_" + path.name))
 
         return file, gherkin_document["feature"]["name"]
     except (SystemExit, KeyboardInterrupt):
