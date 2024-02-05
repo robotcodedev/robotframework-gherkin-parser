@@ -19,6 +19,7 @@ if __name__ == "__main__" and __package__ is None or __package__ == "":
 
 from scripts.tools import get_version
 
+PRE_RELEASE = True
 
 def main() -> None:
     dist_path = Path("./dist").absolute()
@@ -46,7 +47,7 @@ def main() -> None:
     ).check_returncode()
 
     run(
-        f"npx vsce package {'--pre-release' if get_version().prerelease else ''} -o ./dist", shell=True
+        f"npx vsce package {'--pre-release' if PRE_RELEASE or get_version().prerelease else ''} -o ./dist", shell=True
     ).check_returncode()
 
 
