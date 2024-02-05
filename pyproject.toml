@@ -46,7 +46,7 @@ classifiers = [
   "Framework :: Robot Framework :: Tool",
 ]
 requires-python = ">=3.8"
-dependencies = ["robotframework>=7.0", "gurke==0.3.1"]
+dependencies = ["robotframework>=7.0", "gurke==0.3.2"]
 dynamic = ["version"]
 
 

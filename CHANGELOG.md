@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
+## [0.3.2](https://github.com/d-biehl/robotframework-gherkin-parser/compare/v0.3.1..v0.3.2) - 2024-02-05
+
+### Bug Fixes
+
+- **vscode:** Use png icons instead of svg ([b8256ec](https://github.com/d-biehl/robotframework-gherkin-parser/commit/b8256ecc4b5d5c12a12872a2774134d53f690c8c))
+
+
 ## [0.3.1](https://github.com/d-biehl/robotframework-gherkin-parser/compare/v0.3.0..v0.3.1) - 2024-02-05
 
 ### Bug Fixes
