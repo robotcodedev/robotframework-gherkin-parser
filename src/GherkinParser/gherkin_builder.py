@@ -96,6 +96,11 @@ def build_gherkin_model(source: PathLike[str], content: Optional[str] = None) ->
         for pickle in pickles:
             testcase_body = []
 
+            node, _parent = find_ast_node_id(gherkin_document, pickle["astNodeIds"][0])
+            doc = node.get("description", None) if node else None
+            if doc:
+                testcase_body.append(Documentation.from_params(doc.strip()))
+
             tags = [r["name"][1:] for r in pickle["tags"] if not any(f["id"] == r["astNodeId"] for f in feature_tags)]
 
             if tags:
