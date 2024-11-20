@@ -49,7 +49,7 @@ class Library(ListenerV3):
         finally:
             self._in_call_hooks = False
 
-    def yield_hooks(self, events: Union[str, Tuple[str, ...]], *args: Any, **kwargs: Any) -> Iterator[str]:
+    def yield_hooks(self, event_type: str, events: Union[str, Tuple[str, ...]], *args: Any, **kwargs: Any) -> Iterator[str]:
         if isinstance(events, str):
             events = (events,)
         ctx = EXECUTION_CONTEXTS.current
@@ -57,7 +57,7 @@ class Library(ListenerV3):
             *([(v.name, l) for l in v.keywords] for v in ctx.namespace._kw_store.resources.values()),
             *([(v.name, l) for l in v.keywords] for v in ctx.namespace._kw_store.libraries.values()),
         ):
-            hook_tags = [tag for tag in kw.tags if tag.startswith(self.prefix)]
+            hook_tags = [tag for tag in kw.tags if tag.startswith(self.prefix + event_type)]
             for tag in hook_tags:
                 if tag[len(self.prefix) :] in events:
                     full_name = name + "." + kw.name
@@ -75,7 +75,7 @@ class Library(ListenerV3):
 
         kws: List[str] = []
 
-        for name in self.yield_hooks(events):
+        for name in self.yield_hooks("before-", events):
             if kws:
                 kws.append("AND")
             kws.append(name)
@@ -99,7 +99,7 @@ class Library(ListenerV3):
 
         kws = []
 
-        for name in self.yield_hooks(events):
+        for name in self.yield_hooks("after-", events):
             if kws:
                 kws.append("AND")
             kws.append(name)
@@ -120,10 +120,10 @@ class Library(ListenerV3):
                 )
 
     def start_suite(self, data: running.TestSuite, result: result.TestSuite) -> None:
-        self._create_setup_and_teardown(data, ("before-suite", "before-feature"))
+        self._create_setup_and_teardown(data, ("before-suite", "before-feature", "after-suite", "after-feature"))
 
     def start_test(self, data: running.TestCase, result: result.TestCase) -> None:
-        self._create_setup_and_teardown(data, ("before-test", "before-test"))
+        self._create_setup_and_teardown(data, ("before-test", "after-test"))
 
     # def start_keyword(self, data: running.Keyword, result: result.Keyword) -> None:
     #      # self.call_hooks(("before-keyword", "before-step"))
